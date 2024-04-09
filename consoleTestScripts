@@ -1,0 +1,21 @@
+addTask({
+    taskID: 2,
+    name: "test",
+    description: "this is a test",
+    dueDate: "May 5",
+    urgent: false,
+    projectID: "Sample 1"
+})
+
+
+addTask({
+    taskID: 1,
+    name: "test",
+    description: "this is a test",
+    dueDate: "May 5",
+    urgent: true,
+    projectID: "Sample 2"
+})
+
+
+setCurrentProject("Sample 1")
