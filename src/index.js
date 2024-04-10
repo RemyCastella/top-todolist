@@ -7,6 +7,7 @@ import "./filterTasks.js"
 import "./createProjectObject.js"
 import "./updateProjectLibrary.js"
 import "./createProjectElements.js"
+import "./localStorage.js"
 import createTask from "./createTask.js"
 import { addTask, getTaskLibrary } from "./updateTaskLibrary.js"
 import { updateProjectLibrary, getProjectLibrary } from "./updateProjectLibrary.js"
@@ -23,12 +24,9 @@ window.getProjectLibrary = getProjectLibrary
 homepageUI()
 sampleTasks.forEach(task => createTask(task))
 sampleProject.forEach(project => createProjectObject(project))
-const taskLibrary = getTaskLibrary()
-pubsub.publish("createTaskElements", taskLibrary)
 
 const taskLibraryJSON = JSON.stringify(getTaskLibrary())
 localStorage.setItem("taskLibrary", taskLibraryJSON)
 
-const taskLibraryObj = JSON.parse(localStorage.getItem("taskLibrary"))
-console.log(taskLibraryObj)
+
 

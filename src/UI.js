@@ -10,12 +10,10 @@ export const taskTitleInput = document.querySelector("#task-title-input")
 export const taskDescriptionInput = document.querySelector("#task-description-input")
 export const dueDateInput = document.querySelector("#due-date-input")
 export const importantInput = document.querySelector("#important-task")
-
 export const projectForm = document.querySelector(".create-new-project")
 export const projectFormTitle = document.querySelector(".project-form-title")
 export const projectTitleInput = document.querySelector("#project-title-input")
 export const projectDescriptionInput = document.querySelector("#project-description-input")
-
 
 
 export default function homepageUI() {
@@ -116,16 +114,6 @@ export default function homepageUI() {
     projectHeader.appendChild(projectDescription)
     projectContentContainer.appendChild(projectHeader)
     projectContentContainer.appendChild(taskContainer)
-
-    //create + add add task button
-
-    // const addTaskButton = document.createElement("button")
-    // addTaskButton.classList.add("add-task-btn")
-    // addTaskButton.textContent = "+"
-    // addTaskButton.addEventListener("click", e => {
-    //     taskForm.showModal()
-    // })
-    // projectContentContainer.appendChild(addTaskButton)
 
     const app = document.querySelector(".app")
     app.appendChild(sideBarContainer)

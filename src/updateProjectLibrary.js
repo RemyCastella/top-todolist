@@ -6,6 +6,7 @@ let projectLibrary = []
 
 export function setProjectLibrary(arr) {
     projectLibrary = arr
+    localStorage.setItem("projectLibrary", JSON.stringify(projectLibrary))
 }
 pubsub.subscribe("setProjectLibrary", setProjectLibrary)
 

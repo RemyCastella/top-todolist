@@ -11,6 +11,7 @@ let taskLibrary = []
 
 export function setTaskLibrary(arr) {
     taskLibrary = arr
+    localStorage.setItem("taskLibrary", JSON.stringify(taskLibrary))
 }
 
 pubsub.subscribe("setTaskLibrary", setTaskLibrary)
@@ -19,20 +20,11 @@ export function getTaskLibrary() {
     return taskLibrary
 }
 
-
 export function addTask(obj) {
 
     taskLibrary.push(obj)
     pubsub.publish("setTaskLibrary", taskLibrary)
-
-    const activeTaskGroup = document.querySelector(".active")
-    const activeTaskGroupTitle = activeTaskGroup.childNodes[1].textContent
-
-    if (activeTaskGroup.classList.contains("project")){
-        pubsub.publish("filterTasksByProject", taskLibrary)
-    } else {
-        pubsub.publish("filterTasksByTaskGroup", activeTaskGroupTitle)
-    }
+    pubsub.publish("relayStoredTasks")
     
 }
 pubsub.subscribe("newTask", addTask)
@@ -46,6 +38,7 @@ export function deleteTask(e) {
     //remove the target task from the task library
     taskLibrary = taskLibrary.filter(task => task.TaskID !== Number(targetTaskID))
     pubsub.publish("setTaskLibrary", taskLibrary)
+    pubsub.publish("relayStoredTasks")
 
     const activeTaskGroup = document.querySelector(".active")
     const activeTaskGroupTitle = activeTaskGroup.childNodes[1].textContent
@@ -86,6 +79,7 @@ export function editTask(obj) {
     currentTask.Important = obj.Important
 
     pubsub.publish("setTaskLibrary", taskLibrary)
+    pubsub.publish("relayStoredTasks")
 
     const activeTaskGroup = document.querySelector(".active")
     const activeTaskGroupTitle = activeTaskGroup.childNodes[1].textContent

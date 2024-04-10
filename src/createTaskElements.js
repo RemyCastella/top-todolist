@@ -5,11 +5,11 @@ import editSvg from "./icons/pencil.svg"
 import { deleteTask, handleEditTaskButton } from "./updateTaskLibrary";
 import { taskForm } from "./UI";
 
-export default function createTaskElements(arr) {
+export default function createTaskElements(taskLibrary) {
     
     const fragment = new DocumentFragment()
 
-    arr.forEach(task => {
+    taskLibrary.forEach(task => {
         const taskElement = document.createElement("div")
         taskElement.classList.add("task")
         taskElement.dataset.id = task.TaskID
