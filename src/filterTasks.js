@@ -90,6 +90,7 @@ function filterTasksByProject(arr) {
     const currentTasks = arr.filter(task => task.ProjectID === currentProjectID)
 
     pubsub.publish("createTaskElements", currentTasks)
+    pubsub.publish("addTaskButton")
 
 }
 

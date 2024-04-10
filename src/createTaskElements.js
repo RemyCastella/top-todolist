@@ -3,6 +3,7 @@ import { pubsub } from "./pubsub";
 import deleteSvg from "./icons/trash.svg"
 import editSvg from "./icons/pencil.svg"
 import { deleteTask, handleEditTaskButton } from "./updateTaskLibrary";
+import { taskForm } from "./UI";
 
 export default function createTaskElements(arr) {
     
@@ -73,14 +74,31 @@ export default function createTaskElements(arr) {
         taskDescription.textContent = task.Description
         taskDescription.style.display = "none"
 
+        taskCardLeft.appendChild(taskDescription)
         taskElement.appendChild(taskCardLeft)
         taskElement.appendChild(taskCardRight)
-        taskCardLeft.appendChild(taskDescription)
-
         fragment.appendChild(taskElement)
+        
     })
+
 
     pubsub.publish("renderTasks", fragment)
 }
 
 pubsub.subscribe("createTaskElements", createTaskElements)
+
+function addTaskButton() {
+
+    const taskContainer = document.querySelector(".tasks-content")
+    const addTaskButton = document.createElement("button")
+    addTaskButton.classList.add("add-task-btn")
+    addTaskButton.textContent = "+"
+    addTaskButton.addEventListener("click", e => {
+        taskForm.showModal()
+    })
+    
+    taskContainer.appendChild(addTaskButton)
+
+}
+
+pubsub.subscribe("addTaskButton", addTaskButton)

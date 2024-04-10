@@ -118,13 +118,14 @@ export default function homepageUI() {
     projectContentContainer.appendChild(taskContainer)
 
     //create + add add task button
-    const addTaskButton = document.createElement("button")
-    addTaskButton.classList.add("add-task-btn")
-    addTaskButton.textContent = "+"
-    addTaskButton.addEventListener("click", e => {
-        taskForm.showModal()
-    })
-    projectContentContainer.appendChild(addTaskButton)
+
+    // const addTaskButton = document.createElement("button")
+    // addTaskButton.classList.add("add-task-btn")
+    // addTaskButton.textContent = "+"
+    // addTaskButton.addEventListener("click", e => {
+    //     taskForm.showModal()
+    // })
+    // projectContentContainer.appendChild(addTaskButton)
 
     const app = document.querySelector(".app")
     app.appendChild(sideBarContainer)
