@@ -2,7 +2,7 @@ import { format } from "date-fns";
 import { pubsub } from "./pubsub";
 import deleteSvg from "./icons/trash.svg"
 import editSvg from "./icons/pencil.svg"
-import { deleteTask, handleEditTaskButton } from "./updateTaskLibrary";
+import { deleteTask, handleEditTaskButton, setTaskLibrary } from "./updateTaskLibrary";
 import { taskForm } from "./UI";
 
 export default function createTaskElements(taskLibrary) {
@@ -42,7 +42,8 @@ export default function createTaskElements(taskLibrary) {
         }
         checkBox.addEventListener("change", e => {
             e.target.parentNode.parentNode.classList.toggle("complete")
-            task.Complete ? task.Complete = false : task.Complete = true 
+            task.Complete ? task.Complete = false : task.Complete = true
+            setTaskLibrary(taskLibrary)
         })
         const taskLabel = document.createElement("div")
         taskLabel.classList.add("task-label")
@@ -69,9 +70,7 @@ export default function createTaskElements(taskLibrary) {
   
         const taskDescription = document.createElement("div")
         taskDescription.classList.add("task-description")
-        taskDescription.textContent
-        taskDescription.textContent = "No description"
-        taskDescription.textContent = task.Description
+        taskDescription.textContent = task.Description ? task.Description : "No description"
         taskDescription.style.display = "none"
 
         taskCardLeft.appendChild(taskDescription)
@@ -84,8 +83,8 @@ export default function createTaskElements(taskLibrary) {
 
     pubsub.publish("renderTasks", fragment)
 }
-
 pubsub.subscribe("createTaskElements", createTaskElements)
+
 
 function addTaskButton() {
 

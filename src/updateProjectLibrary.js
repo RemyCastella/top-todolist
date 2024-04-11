@@ -2,40 +2,40 @@ import { pubsub } from "./pubsub"
 import { projectForm, projectFormTitle, projectTitleInput, projectDescriptionInput, addProjectSubmitButton } from "./UI";
 import { getTaskLibrary } from "./updateTaskLibrary";
 
-let projectLibrary = []
-
 export function setProjectLibrary(arr) {
-    projectLibrary = arr
-    localStorage.setItem("projectLibrary", JSON.stringify(projectLibrary))
+    localStorage.setItem("projectLibrary", JSON.stringify(arr))
 }
 pubsub.subscribe("setProjectLibrary", setProjectLibrary)
 
 export function getProjectLibrary() {
-    return projectLibrary
+    const projectLibraryString = localStorage.getItem("projectLibrary")
+    return JSON.parse(projectLibraryString)
 }
 
 export function addProject(obj) {
+    const projectLibrary = getProjectLibrary()
     projectLibrary.push(obj)
     pubsub.publish("setProjectLibrary", projectLibrary)
-    pubsub.publish("createProjectElements", projectLibrary)
+    pubsub.publish("relayStoredProjects")
 }
 pubsub.subscribe("newProject", addProject)
 
 let projectToEditIndex = 0
 
 export function handleEditProjectButton(e) {
+    const projectLibrary = getProjectLibrary()
     projectToEditIndex = projectLibrary.findIndex(project => project.ProjectID === Number(e.target.dataset.id))
     const projectToUpdate = projectLibrary[projectToEditIndex]
     addProjectSubmitButton.textContent = "Edit Project"
     projectFormTitle.textContent = "Edit your project!"
     projectTitleInput.value = projectToUpdate.Title
     projectDescriptionInput.value = projectToUpdate.Description
-    projectForm.showModal()
-        
+    projectForm.showModal()   
 }
 
 function updateProjectInfo(obj) {
 
+    const projectLibrary = getProjectLibrary()
     const projectToUpdate = projectLibrary[projectToEditIndex]
 
     //Get tasks for the project to update
@@ -49,13 +49,13 @@ function updateProjectInfo(obj) {
 
     pubsub.publish("setTaskLibrary", taskLibrary)
     pubsub.publish("setProjectLibrary", projectLibrary)
-    pubsub.publish("createProjectElements", projectLibrary)
+    pubsub.publish("relayStoredProjects")
 }
 pubsub.subscribe("updateProjectInfo", updateProjectInfo)
 
 export function deleteProject(e) {
-    projectLibrary = projectLibrary.filter(project => project.ProjectID !== Number(e.target.dataset.id))
-    
+    let projectLibrary = getProjectLibrary()
+    projectLibrary = projectLibrary.filter(project => project.ProjectID !== Number(e.target.dataset.id))  
     pubsub.publish("setProjectLibrary", projectLibrary)
-    pubsub.publish("createProjectElements", projectLibrary)
+    pubsub.publish("relayStoredProjects")
 }

@@ -10,11 +10,21 @@ export const taskTitleInput = document.querySelector("#task-title-input")
 export const taskDescriptionInput = document.querySelector("#task-description-input")
 export const dueDateInput = document.querySelector("#due-date-input")
 export const importantInput = document.querySelector("#important-task")
+export const taskCancelButton = document.querySelector(".add-task-cancel")
+taskCancelButton.addEventListener("click", e => {
+    e.preventDefault()
+    taskForm.close()
+}) 
+
 export const projectForm = document.querySelector(".create-new-project")
 export const projectFormTitle = document.querySelector(".project-form-title")
 export const projectTitleInput = document.querySelector("#project-title-input")
 export const projectDescriptionInput = document.querySelector("#project-description-input")
-
+export const projectCancelButton = document.querySelector(".add-project-cancel")
+projectCancelButton.addEventListener("click", e => {
+    e.preventDefault()
+    projectForm.close()
+})
 
 export default function homepageUI() {
     const fragment = new DocumentFragment()

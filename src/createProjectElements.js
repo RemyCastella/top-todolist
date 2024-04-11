@@ -5,8 +5,6 @@ import editSvg from "./icons/pencil.svg"
 import { handleEditProjectButton, deleteProject } from "./updateProjectLibrary";
 import { handleProjectButton } from "./filterTasks";
 
-
-
 export default function createProjectElements(arr) {
 
     const fragment = new DocumentFragment()

@@ -1,6 +1,5 @@
 import { isToday, isThisWeek } from "date-fns"
 import { pubsub } from "./pubsub"
-import { getTaskLibrary } from "./updateTaskLibrary"
 import { getProjectLibrary } from "./updateProjectLibrary"
 
 
