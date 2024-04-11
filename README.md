@@ -1,2 +1,2 @@
 # top-todolist
-A to-do list application that brings together modular design, object oriented design principles (SOLID), and Webpack.
+A to-do list application built with vanilla JavaScript, where I used the pub/sub design pattern for the first time and was mindful of the SOLID principle (note: mindful of !== well executed). This was also the first time using an external library (date-fns) and implementing local storage. The code still requires major refactoring but the app is working and I have decided to move on with the Odin Project curriculum for now...
